@@ -1,6 +1,8 @@
 import React from 'react'
 import "./character.css"
 
+import { useParams } from 'react-router-dom';
+
 import { useState } from 'react'
 
 import characterimg from "../img/character.jpg"
@@ -12,8 +14,11 @@ import mus2 from "../img/mus2.jpg"
 
 export default function Characte() {
 
+    let  id  = useParams();
+    
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedImageMus, setSelectedImageMus] = useState(null);
+    const [idValue,setIdValue] = useState()
 
     const handleImageClick = (imagePath,value) => {
         if (value ==1){
@@ -26,8 +31,18 @@ export default function Characte() {
             setSelectedImageMus(imagePath) 
         }
       
+        valuLink()
 
     }
+
+const valuLink = ()=>{
+    setIdValue(id)
+
+    console.log(idValue)
+}
+
+   
+    
 
   return (
     <div className='characteralign'>
@@ -36,13 +51,14 @@ export default function Characte() {
             <img className='effectEye' src={selectedImage} alt="" />
             <img className='effectmus' src={selectedImageMus} alt="" />
 
+            {/* <h1>{idValue}</h1> */}
+
         </div>
         <div className='imgAction'>
-            <img src={spec1} alt="" onClick={()=> handleImageClick({spec1},1)}/>
-            <img src={spec2} alt=""onClick={()=> handleImageClick({spec2},1)} />
-            <img src={mus1} alt="" onClick={()=> handleImageClick({mus1},2)} />
-            <img src={mus2} alt=""  onClick={()=> handleImageClick({mus2},2)}/>
-
+            <img src={spec1} alt="" onClick={ (e)=> handleImageClick(spec1,1)}/>
+            <img src={spec2} alt=""onClick={()=> handleImageClick(spec2,1)} />
+            <img src={mus1} alt="" onClick={()=> handleImageClick(mus1,2)} />
+            <img src={mus2} alt=""  onClick={()=> handleImageClick(mus2,2)}/>
         </div>
 
     </div>
